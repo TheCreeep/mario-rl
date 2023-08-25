@@ -1,6 +1,6 @@
 <template>
   <main>
-      <iframe src="http://127.0.0.1:5000/render_mario" scrolling="no" width="256" height="240"></iframe>
+      <iframe src="http://127.0.0.1:5000/render_feed" scrolling="no" width="256" height="240"></iframe>
   </main>
 </template>
 

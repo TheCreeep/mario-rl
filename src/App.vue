@@ -5,14 +5,27 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <div class="page">
     <div class="page__header">
-      <img src="@/assets/Logo.png" alt="Logo" class="page__header__logo">
+      <img src="@/assets/Logo.png" alt="Logo" class="page__header__logo" />
       <nav class="page__header__nav">
-                        <RouterLink class="page__header__nav__link" @click.native="selectPage('modelselect')" to="/modelselect">Model
-                          Select
-                        </RouterLink>
-                        <RouterLink class="page__header__nav__link" @click.native="selectPage('dataview')" to="/dataview">Data Viewer
-                      </RouterLink>
-                <RouterLink class="page__header__nav__link" @click.native="selectPage('training')" to="/training">Training
+        <RouterLink
+          class="page__header__nav__link"
+          to="/modelselect"
+          >Model Select
+        </RouterLink>
+        <RouterLink
+          class="page__header__nav__link"
+          to="/dataview"
+          >Data Viewer
+        </RouterLink>
+        <RouterLink
+          class="page__header__nav__link"
+          to="/training"
+          >Training
+        </RouterLink>
+        <RouterLink
+          class="page__header__nav__link"
+          to="/settings"
+          >Settings
         </RouterLink>
       </nav>
     </div>
@@ -20,7 +33,6 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="page__content">
       <RouterView />
     </div>
-
   </div>
 </template>
 
@@ -28,20 +40,15 @@ import { RouterLink, RouterView } from 'vue-router'
 export default {
   name: 'App',
   mounted() {
-    this.selected = this.$route.name.toLowerCase()
+    this.$router.push('/modelselect')
   },
   data() {
     return {
-      selected: "",
+      selected: 'modelselect'
     }
   },
-  methods: {
-    selectPage(page) {
-      this.selected = page
-    }
-  }
+  methods: {}
 }
-
 </script>
 
 <style lang="scss">
@@ -60,12 +67,12 @@ body {
 }
 
 .router-link-active {
-  color: #FFF !important;
+  color: #fff !important;
   text-shadow: 0 0 10px #000;
 }
 
 .page {
-  background: #FACD00;
+  background: #facd00;
   min-height: calc(100vh - 2rem);
   padding: 1rem;
 
@@ -88,7 +95,7 @@ body {
       &__link {
         color: #222;
         text-align: center;
-        font-family: "MarioMaker";
+        font-family: 'MarioMaker';
         font-size: 2.25rem;
         text-decoration: none;
         position: relative;
@@ -99,10 +106,8 @@ body {
           transform: scale(1.02);
           backface-visibility: hidden;
         }
-
       }
     }
-
   }
 }
 </style>
