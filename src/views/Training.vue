@@ -1,6 +1,6 @@
 <template>
-  <div class="content"></div>
-  
+  <div class="content">
+  </div>
 </template>
 
 <script setup>
@@ -12,13 +12,9 @@ const store = useSettingsStore()
 export default {
   name: 'Settings',
   data() {
-    return {
-
-    }
+    return {}
   },
-  computed: {
-    
+  methods: {
   }
 }
-
 </script>

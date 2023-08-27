@@ -1,6 +1,6 @@
 <template>
   <main>
-      <iframe src="http://127.0.0.1:5000/render_feed" scrolling="no" width="256" height="240"></iframe>
+      <iframe src="http://127.0.0.1:5000/render_feed" scrolling="no" width="512" height="240"></iframe>
   </main>
 </template>
 
@@ -32,8 +32,8 @@ main {
   iframe {
     transform: scale(2) translate(0, 100px);
     border: 10px solid transparent;
-    border-image-source: url('../assets/redBrick.png');
-    border-image-slice: 100;
+    /* border-image-source: url('../assets/redBrick.png');
+    border-image-slice: 100; */
   }
 }
 </style>
