@@ -1,47 +1,27 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
   <div class="page">
     <div class="page__header">
       <img src="@/assets/Logo.png" alt="Logo" class="page__header__logo" />
       <nav class="page__header__nav">
-        <RouterLink
-          class="page__header__nav__link"
-          to="/modelselect"
-          >Model Select
-        </RouterLink>
-        <RouterLink
-          class="page__header__nav__link"
-          to="/dataview"
-          >Data Viewer
-        </RouterLink>
-        <RouterLink
-          class="page__header__nav__link"
-          to="/training"
-          >Training
-        </RouterLink>
-        <RouterLink
-          class="page__header__nav__link"
-          to="/settings"
-          >Settings
-        </RouterLink>
+        <RouterLink class="page__header__nav__link" to="/modelselect">Model Select </RouterLink>
+        <RouterLink class="page__header__nav__link" to="/dataview">Data Viewer </RouterLink>
+        <RouterLink class="page__header__nav__link" to="/training">Training </RouterLink>
+        <RouterLink class="page__header__nav__link" to="/settings">Settings </RouterLink>
       </nav>
     </div>
 
-    <div class="page__content">
-      <RouterView />
-    </div>
+    <RouterView v-if="$route.path !== '/'" />
+    <div class="page__content" v-else></div>
   </div>
 </template>
+
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+</script>
 
 <script>
 export default {
   name: 'App',
-  mounted() {
-    this.$router.push('/modelselect')
-  },
   data() {
     return {
       selected: 'modelselect'

@@ -1,7 +1,24 @@
+<template>
+  <div class="content"></div>
+  
+</template>
+
 <script setup>
+import { useSettingsStore } from '@/stores/settings'
+const store = useSettingsStore()
 </script>
 
-<template>
-  <main>
-  </main>
-</template>
+<script>
+export default {
+  name: 'Settings',
+  data() {
+    return {
+
+    }
+  },
+  computed: {
+    
+  }
+}
+
+</script>
