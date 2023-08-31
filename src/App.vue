@@ -17,6 +17,11 @@
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { useSettingsStore } from '@/stores/settings'
+import 'vue3-toastify/dist/index.css';
+const settingsStore = useSettingsStore()
+
+settingsStore.loadSettings()
 </script>
 
 <script>

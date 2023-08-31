@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <h1 class="content__title">Paramètres</h1>
-    <div class="content__inputs">
+    <div class="content__inputs" @keypress.enter="saveSettings(store, settings)">
       <div class="content__inputs__item" v-for="input in inputs">
         <div class="content__inputs__item__input">
           <label :for="input.id">{{ input.name }}</label>
@@ -74,6 +74,9 @@ export default {
         saveLogFrequency: settings.saveLogFrequency || store.settings.saveLogFrequency,
         nbEnv: settings.nbEnv || store.settings.nbEnv
       }
+
+      if(settings.modelsPath === '' && settings.logPath === '' && settings.saveModelFrequency === '' && settings.saveLogFrequency === '' && settings.nbEnv === '') return
+
       store.saveSettings(settingsToPush)
 
       this.settings = {
