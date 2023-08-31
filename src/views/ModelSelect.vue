@@ -247,14 +247,14 @@ $rows: 2;
 
           .top {
             display: flex;
-            background-image: url('../assets/mariolevel.png');
+            background-image: url('@/assets/mariolevel.png');
             background-size: cover;
             background-position: center;
 
-            padding: 0.7em;
+            padding: 1.5em 0.5em;
             font-family: 'MarioMaker';
             color: white;
-            font-size: 32px;
+            font-size: 20px;
             height: 160px;
           }
 
