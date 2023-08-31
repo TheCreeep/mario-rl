@@ -6,12 +6,15 @@ export const useModelsStore = defineStore('modelsStore', {
     modelsPath: '',
     models: [],
     modelPerPage: 10,
+    loading: false
   }),
   actions: {
     async getAllModels() {
+      this.loading = true
       await axios.get(import.meta.env.VITE_API_BASE_URL + 'models').then(response => {
         this.models = response.data
-      }) 
+        this.loading = false
+      })
     }
   },
   getters: {

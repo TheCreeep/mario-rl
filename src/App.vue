@@ -19,8 +19,8 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { useSettingsStore } from '@/stores/settings'
 import 'vue3-toastify/dist/index.css';
-const settingsStore = useSettingsStore()
 
+const settingsStore = useSettingsStore()
 settingsStore.loadSettings()
 </script>
 
@@ -37,7 +37,6 @@ export default {
 </script>
 
 <style lang="scss">
-/* Create font face */
 @font-face {
   font-family: 'MarioMaker';
   src: url('@/assets/fonts/super-mario-maker-extended.ttf');

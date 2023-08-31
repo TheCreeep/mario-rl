@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="content__select">
+    <div class="content__select" v-if="!store.loading">
       <img class="content__select__hand" @click="scrollLeft(store)" src="../assets/leftarrow.png" />
       <div class="content__select__models">
         <div class="content__select__models__modelpage" v-for="page in store.pages" :key="page.id">
@@ -32,22 +32,47 @@
         src="../assets/rightarrow.png"
       />
     </div>
-    <div class="content__pagination">
-      <div class="content__pagination__number --extra" @click="goToPage(store, 0 - currentPage)">
+    <div class="content__loading" v-else>
+      <img src="@/assets/loading.gif" alt="loading" />
+      <h1 class="content__loading__title">Chargement des modèles...</h1>
+    </div>
+    <div class="content__pagination" v-if="!store.loading">
+      <div
+        class="content__pagination__number --extra"
+        :class="currentPage === 0 ? '--selected' : ''"
+        @click="goToPage(store, 0 - currentPage)"
+      >
         {{ 1 }}
       </div>
       <div
         class="content__pagination__number"
+        :class="page === currentPage ? '--selected' : ''"
         v-for="page in store.pages
+          /* Isolate first and last */
           .slice(1, -1)
           .map((page) => page.id)
-          .slice(currentPage <= 4 ? currentPage : currentPage - 5 , currentPage <= store.pages.length -5 ? currentPage + 5 : currentPage)"
+          .slice(
+            currentPage <= 4
+              ? 0
+              : currentPage >= store.pages.length - 5
+              ? currentPage - (7 - (store.pages.length - currentPage))
+              : currentPage - 3,
+            currentPage <= 4
+              ? currentPage + (5 - currentPage)
+              : currentPage >= store.pages.length - 5
+              ? store.pages.length - 1
+              : currentPage + 2
+          )"
         :key="page"
         @click="goToPage(store, page - currentPage)"
       >
         {{ page + 1 }}
       </div>
-      <div class="content__pagination__number --extra" @click="goToPage(store, store.pages.length - currentPage)">
+      <div
+        class="content__pagination__number --extra"
+        :class="currentPage === store.pages.length - 1 ? '--selected' : ''"
+        @click="goToPage(store, store.pages.length - 1 - currentPage)"
+      >
         {{ store.pages.length }}
       </div>
     </div>
@@ -70,8 +95,6 @@ export default {
       currentPage: 0
     }
   },
-  mounted() {},
-  computed: {},
   methods: {
     goToPage(store, pagenb) {
       if (pagenb < 0) {
@@ -113,6 +136,20 @@ $rows: 2;
   align-items: center;
   justify-content: center;
 
+  &__loading {
+    margin-top: 10em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+
+    &__title {
+      font-family: 'MarioMaker';
+      font-size: 32px;
+    }
+  }
+
   &__pagination {
     display: flex;
     align-items: center;
@@ -133,7 +170,10 @@ $rows: 2;
       border-radius: 1em;
       cursor: pointer;
       user-select: none;
-      transition: all 0.1s ease-in-out;
+      transition:
+        all 0.3s ease-in-out,
+        outline 0.3s ease-in-out 500ms,
+        color 0.3s ease-in-out 500ms;
 
       &.--extra {
         width: 35px;
@@ -141,8 +181,14 @@ $rows: 2;
         font-size: 20px;
       }
 
+      &.--selected {
+        color: white;
+        outline: 2px solid white;
+      }
+
       &:hover {
         transform: translateY(-3px);
+        box-shadow: 0 6px 6px 0 #00000055;
       }
     }
   }
@@ -196,6 +242,8 @@ $rows: 2;
           width: 230px;
           max-height: 230px;
           border: 3px solid black;
+          user-select: none;
+          cursor: pointer;
 
           .top {
             display: flex;
