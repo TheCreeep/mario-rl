@@ -19,7 +19,7 @@ export const useModelsStore = defineStore('modelsStore', {
       let pages = []
       let numberOfPages = Math.ceil(state.models.length / state.modelPerPage)
       for (let i = 0; i < numberOfPages; i++) {
-        pages.push(state.models.slice(i * state.modelPerPage, (i + 1) * state.modelPerPage))
+        pages.push({ "id": i, "page": state.models.slice(i * state.modelPerPage, (i + 1) * state.modelPerPage) })
       }
       return pages
     }

@@ -1,12 +1,12 @@
 <template>
   <div class="content">
     <div class="content__select">
-      <img class="content__select__hand" @click="scrollLeft()" src="../assets/leftarrow.png" />
+      <img class="content__select__hand" @click="scrollLeft(store)" src="../assets/leftarrow.png" />
       <div class="content__select__models">
-        <div class="content__select__models__modelpage" v-for="page in store.pages">
+        <div class="content__select__models__modelpage" v-for="page in store.pages" :key="page.id">
           <div
             class="content__select__models__modelpage__model"
-            v-for="model in page"
+            v-for="model in page.page"
             :key="model.id"
           >
             <div class="top">
@@ -18,20 +18,46 @@
                 <div class="bottom__details__name">
                   Epoch : {{ (model.epoch / 1_000_000).toFixed(2) + 'M' }}
                 </div>
-                <div class="bottom__details__date">Date : {{ dayjs(model.date).format("DD/MM/YY hh:mm:ss") }}</div>
+                <div class="bottom__details__date">
+                  Date : {{ dayjs(model.date).format('DD/MM/YY hh:mm:ss') }}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <img class="content__select__hand" @click="scrollRight()" src="../assets/rightarrow.png" />
+      <img
+        class="content__select__hand"
+        @click="scrollRight(store)"
+        src="../assets/rightarrow.png"
+      />
+    </div>
+    <div class="content__pagination">
+      <div class="content__pagination__number --extra" @click="goToPage(store, 0 - currentPage)">
+        {{ 1 }}
+      </div>
+      <div
+        class="content__pagination__number"
+        v-for="page in store.pages
+          .slice(1, -1)
+          .map((page) => page.id)
+          .slice(currentPage <= 4 ? currentPage : currentPage - 5 , currentPage <= store.pages.length -5 ? currentPage + 5 : currentPage)"
+        :key="page"
+        @click="goToPage(store, page - currentPage)"
+      >
+        {{ page + 1 }}
+      </div>
+      <div class="content__pagination__number --extra" @click="goToPage(store, store.pages.length - currentPage)">
+        {{ store.pages.length }}
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import dayjs from 'dayjs';
+import dayjs from 'dayjs'
 import { useModelsStore } from '@/stores/models'
+
 const store = useModelsStore()
 store.getAllModels()
 </script>
@@ -41,24 +67,36 @@ export default {
   name: 'ModelSelect',
   data() {
     return {
+      currentPage: 0
     }
   },
-  mounted() {
-  },
-  computed: {
-  },
+  mounted() {},
+  computed: {},
   methods: {
-    scrollLeft() {
-      document.querySelector('.content__select__models').scrollBy({
-        left: -1000,
-        behavior: 'smooth'
-      })
+    goToPage(store, pagenb) {
+      if (pagenb < 0) {
+        this.scrollLeft(store, -pagenb)
+      } else {
+        this.scrollRight(store, pagenb)
+      }
     },
-    scrollRight() {
-      document.querySelector('.content__select__models').scrollBy({
-        left: 1000,
-        behavior: 'smooth'
-      })
+    scrollLeft(store, page = 1) {
+      if (this.currentPage !== 0) {
+        this.currentPage -= page
+        document.querySelector('.content__select__models').scrollBy({
+          left: -2000 * page,
+          behavior: 'smooth'
+        })
+      }
+    },
+    scrollRight(store, page = 1) {
+      if (this.currentPage !== store.pages.length - 1) {
+        this.currentPage += page
+        document.querySelector('.content__select__models').scrollBy({
+          left: 2000 * page,
+          behavior: 'smooth'
+        })
+      }
     }
   }
 }
@@ -70,6 +108,44 @@ $rows: 2;
 
 .content {
   margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+
+    &__number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'MarioMaker';
+      outline: 2px solid black;
+      text-align: center;
+      width: 25px;
+      height: 25px;
+      padding: 0.2em;
+      border-radius: 1em;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.1s ease-in-out;
+
+      &.--extra {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+      }
+
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
+  }
 
   &__select {
     display: flex;
@@ -80,9 +156,9 @@ $rows: 2;
     &__hand {
       cursor: pointer;
       width: 100px;
-      transition:all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
       &:hover {
-       transform: scale(1.08);
+        transform: scale(1.08);
       }
     }
 

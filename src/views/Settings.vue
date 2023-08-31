@@ -75,7 +75,14 @@ export default {
         nbEnv: settings.nbEnv || store.settings.nbEnv
       }
 
-      if(settings.modelsPath === '' && settings.logPath === '' && settings.saveModelFrequency === '' && settings.saveLogFrequency === '' && settings.nbEnv === '') return
+      if (
+        settings.modelsPath === '' &&
+        settings.logPath === '' &&
+        settings.saveModelFrequency === '' &&
+        settings.saveLogFrequency === '' &&
+        settings.nbEnv === ''
+      )
+        return
 
       store.saveSettings(settingsToPush)
 
@@ -147,9 +154,9 @@ export default {
     border-radius: 1em;
     outline: 3px solid black;
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       transform: scale(1.06);
     }
   }
