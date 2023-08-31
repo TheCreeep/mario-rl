@@ -51,11 +51,6 @@ export default {
           name: "Fréquence d'enregistrement des modèles",
           id: 'saveModelFrequency'
         },
-        saveLogFrequency: {
-          type: 'number',
-          name: "Fréquence d'enregistrement des logs",
-          id: 'saveLogFrequency'
-        },
         nbEnv: {
           type: 'number',
           name: "Nombre d'environnements",
@@ -71,7 +66,6 @@ export default {
         modelsPath: settings.modelsPath || store.settings.modelsPath,
         logPath: settings.logPath || store.settings.logPath,
         saveModelFrequency: settings.saveModelFrequency || store.settings.saveModelFrequency,
-        saveLogFrequency: settings.saveLogFrequency || store.settings.saveLogFrequency,
         nbEnv: settings.nbEnv || store.settings.nbEnv
       }
 
@@ -79,7 +73,6 @@ export default {
         settings.modelsPath === '' &&
         settings.logPath === '' &&
         settings.saveModelFrequency === '' &&
-        settings.saveLogFrequency === '' &&
         settings.nbEnv === ''
       )
         return
@@ -90,7 +83,6 @@ export default {
         modelsPath: '',
         logPath: '',
         saveModelFrequency: '',
-        saveLogFrequency: '',
         nbEnv: ''
       }
     }

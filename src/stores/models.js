@@ -6,7 +6,8 @@ export const useModelsStore = defineStore('modelsStore', {
     modelsPath: '',
     models: [],
     modelPerPage: 10,
-    loading: false
+    loading: false,
+    modelInUse: null
   }),
   actions: {
     async getAllModels() {

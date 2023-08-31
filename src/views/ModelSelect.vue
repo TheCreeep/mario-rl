@@ -6,8 +6,10 @@
         <div class="content__select__models__modelpage" v-for="page in store.pages" :key="page.id">
           <div
             class="content__select__models__modelpage__model"
+            :class="selectedModel === model ? '--selected' : ''"
             v-for="model in page.page"
             :key="model.id"
+            @click="previewModel(model)"
           >
             <div class="top">
               {{ model.name }}
@@ -76,6 +78,26 @@
         {{ store.pages.length }}
       </div>
     </div>
+    <div class="content__selected-model" v-if="modelPreview">
+      <div class="content__selected-model__details">
+        <div class="content__selected-model__details__name">
+          Nom : {{ modelPreview?.name }}
+        </div>
+        <div class="content__selected-model__details__lr">
+          Learning Rate : {{ modelPreview?.lr }}
+        </div>
+        <div class="content__selected-model__details__epoch">
+          Nombre d'Epoch : {{ modelPreview?.epoch }}
+        </div>
+        <div class="content__selected-model__details__date">
+          Date d'enregistrement : {{ dayjs(modelPreview?.date).format('DD/MM/YY hh:mm:ss') }}
+        </div>
+      </div>
+
+      <div class="content__selected-model__used" v-if="modelPreview === selectedModel">Modèle selectionné</div>
+      <div class="content__selected-model__use" @click="useModel(store, modelPreview)" v-else>Utiliser ce modèle</div>
+    </div>
+    <div class="content__nomodel" v-else>Cliquez sur un modèle pour voir les détails</div>
   </div>
 </template>
 
@@ -92,7 +114,9 @@ export default {
   name: 'ModelSelect',
   data() {
     return {
-      currentPage: 0
+      currentPage: 0,
+      modelPreview: null,
+      selectedModel: null
     }
   },
   methods: {
@@ -120,6 +144,13 @@ export default {
           behavior: 'smooth'
         })
       }
+    },
+    previewModel(model) {
+      this.modelPreview = model
+    },
+    useModel(store, model) {
+      this.selectedModel = model
+      store.useModel(model)
     }
   }
 }
@@ -135,6 +166,64 @@ $rows: 2;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  &__nomodel{
+    margin-top: 3em;
+    font-family: 'MarioMaker';
+    font-size: 32px;
+  }
+
+  &__selected-model {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4em;
+    margin-top: 2em;
+
+    &__details {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0.5em;
+      font-family: 'MarioMaker';
+      outline: white 4px solid;
+      font-size: 20px;
+      color: white;
+      background: #806800;
+      padding: 1em;
+      border-radius: 1em;
+    }
+
+    &__use {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      font-family: 'MarioMaker';
+      font-size: 20px;
+      color: white;
+      background: #806800;
+      padding: 1em;
+      border-radius: 1em;
+      outline: white 4px solid;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+
+      &:hover{
+        outline: grey 4px solid;
+        transform: scale(1.05);
+      }
+      
+    }
+    &__used {
+      font-family: 'MarioMaker';
+      font-size: 32px;
+      color: black;
+      user-select: none;      
+    }
+  }
 
   &__loading {
     margin-top: 10em;
@@ -173,7 +262,8 @@ $rows: 2;
       transition:
         all 0.3s ease-in-out,
         outline 0.3s ease-in-out 500ms,
-        color 0.3s ease-in-out 500ms;
+        color 0.3s ease-in-out 500ms,
+        background-color 0.3s ease-in-out 500ms;
 
       &.--extra {
         width: 35px;
@@ -184,6 +274,7 @@ $rows: 2;
       &.--selected {
         color: white;
         outline: 2px solid white;
+        background-color: #806800;
       }
 
       &:hover {
@@ -244,6 +335,10 @@ $rows: 2;
           border: 3px solid black;
           user-select: none;
           cursor: pointer;
+
+          &.--selected {
+            border: 3px solid red;
+          }
 
           .top {
             display: flex;

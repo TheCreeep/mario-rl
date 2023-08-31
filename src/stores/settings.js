@@ -10,7 +10,6 @@ export const useSettingsStore = defineStore('settingsStore', {
       modelsPath: '',
       logPath: '',
       saveModelFrequency: '',
-      saveLogFrequency: '',
       nbEnv: ''
     }
   }),
