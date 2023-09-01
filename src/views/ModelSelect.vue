@@ -80,9 +80,7 @@
     </div>
     <div class="content__selected-model" v-if="modelPreview">
       <div class="content__selected-model__details">
-        <div class="content__selected-model__details__name">
-          Nom : {{ modelPreview?.name }}
-        </div>
+        <div class="content__selected-model__details__name">Nom : {{ modelPreview?.name }}</div>
         <div class="content__selected-model__details__lr">
           Learning Rate : {{ modelPreview?.lr }}
         </div>
@@ -94,8 +92,12 @@
         </div>
       </div>
 
-      <div class="content__selected-model__used" v-if="modelPreview === selectedModel">Modèle selectionné</div>
-      <div class="content__selected-model__use" @click="useModel(store, modelPreview)" v-else>Utiliser ce modèle</div>
+      <div class="content__selected-model__used" v-if="modelPreview === selectedModel">
+        Modèle selectionné
+      </div>
+      <div class="content__selected-model__use" @click="useModel(store, modelPreview)" v-else>
+        Utiliser ce modèle
+      </div>
     </div>
     <div class="content__nomodel" v-else>Cliquez sur un modèle pour voir les détails</div>
   </div>
@@ -167,7 +169,7 @@ $rows: 2;
   align-items: center;
   justify-content: center;
 
-  &__nomodel{
+  &__nomodel {
     margin-top: 3em;
     font-family: 'MarioMaker';
     font-size: 32px;
@@ -211,17 +213,16 @@ $rows: 2;
       transition: all 0.3s ease-in-out;
       cursor: pointer;
 
-      &:hover{
+      &:hover {
         outline: grey 4px solid;
         transform: scale(1.05);
       }
-      
     }
     &__used {
       font-family: 'MarioMaker';
       font-size: 32px;
       color: black;
-      user-select: none;      
+      user-select: none;
     }
   }
 
@@ -319,9 +320,10 @@ $rows: 2;
         display: flex;
         scroll-snap-align: center;
         flex-wrap: wrap;
-        align-items: flex-start;
+        align-items: center;
         justify-content: flex-start;
         gap: 3em;
+        height:530px;
         min-width: calc(
           230px * ($modelPerPage / $rows) + (3em * (($modelPerPage / $rows) - 1)) +
             (3px * 2 * ($modelPerPage / $rows))
@@ -338,6 +340,7 @@ $rows: 2;
 
           &.--selected {
             border: 3px solid red;
+            outline: 3px solid red;
           }
 
           .top {
