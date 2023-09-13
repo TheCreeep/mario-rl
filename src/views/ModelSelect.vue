@@ -11,6 +11,13 @@
             :key="model.id"
             @click="previewModel(model)"
           >
+            <div class="delete" @click.stop="deleteModel(store, model)">
+              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                <path
+                  d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"
+                />
+              </svg>
+            </div>
             <div class="top">
               {{ model.name }}
             </div>
@@ -91,15 +98,24 @@
           Date d'enregistrement : {{ dayjs(modelPreview?.date).format('DD/MM/YY hh:mm:ss') }}
         </div>
       </div>
-
       <div class="content__selected-model__used" v-if="modelPreview === selectedModel">
         Modèle selectionné
       </div>
-      <div class="content__selected-model__use" @click="useModel(store, modelPreview)" v-else>
-        Utiliser ce modèle
+      <div class="content__selected-model__buttons" v-else>
+        <div class="content__selected-model__buttons__use" @click="useModel(store, modelPreview)">
+          Utiliser ce modèle
+        </div>
+        <div
+          class="content__selected-model__buttons__use"
+          @click="useModelAndPreview(store, modelPreview)"
+        >
+          Utiliser et visualiser ce modèle
+        </div>
       </div>
     </div>
-    <div class="content__nomodel" v-else>Cliquez sur un modèle pour voir les détails</div>
+    <div class="content__nomodel" v-else-if="!store.loading">
+      Cliquez sur un modèle pour voir les détails
+    </div>
   </div>
 </template>
 
@@ -152,7 +168,16 @@ export default {
     },
     useModel(store, model) {
       this.selectedModel = model
-      store.useModel(model)
+      store.modelInUse = model
+    },
+    useModelAndPreview(store, model) {
+      this.selectedModel = model
+      store.modelInUse = model
+
+      this.$router.push('/dataview')
+    },
+    deleteModel(store, model) {
+      store.deleteModel(model)
     }
   }
 }
@@ -197,25 +222,33 @@ $rows: 2;
       border-radius: 1em;
     }
 
-    &__use {
+    &__buttons {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.5em;
-      font-family: 'MarioMaker';
-      font-size: 20px;
-      color: white;
-      background: #806800;
-      padding: 1em;
-      border-radius: 1em;
-      outline: white 4px solid;
-      transition: all 0.3s ease-in-out;
-      cursor: pointer;
+      gap: 1em;
 
-      &:hover {
-        outline: grey 4px solid;
-        transform: scale(1.05);
+      &__use {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
+        font-family: 'MarioMaker';
+        font-size: 20px;
+        color: white;
+        background: #806800;
+        padding: 1em;
+        border-radius: 1em;
+        outline: white 4px solid;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+          outline: grey 4px solid;
+          transform: scale(1.05);
+        }
       }
     }
     &__used {
@@ -323,7 +356,7 @@ $rows: 2;
         align-items: center;
         justify-content: flex-start;
         gap: 3em;
-        height:530px;
+        height: 530px;
         min-width: calc(
           230px * ($modelPerPage / $rows) + (3em * (($modelPerPage / $rows) - 1)) +
             (3px * 2 * ($modelPerPage / $rows))
@@ -337,6 +370,37 @@ $rows: 2;
           border: 3px solid black;
           user-select: none;
           cursor: pointer;
+          position: relative;
+
+          .delete {
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+            background: #e02020;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+            svg {
+              fill: white;
+              transition: all 0.3s ease-in-out;
+            }
+
+            &:hover {
+              bottom: 0.5px;
+              right: 0.5px;
+              width: 50px;
+              height: 50px;
+
+              svg {
+                width: calc(14px*1.2);
+                height: calc(16px*1.2);
+              }
+            }
+          }
 
           &.--selected {
             border: 3px solid red;

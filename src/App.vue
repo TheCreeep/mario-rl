@@ -29,8 +29,10 @@
           </p>
           <p>
             Le but de Mario RL est de pouvoir générer et entrainer des modèles d'IA pour le jeu
-            Super Mario Bros. En utilisant l'algorithme de
-            <a href="https://fr.wikipedia.org/wiki/Q-learning" target="_blank">Q-Learning</a>
+            Super Mario Bros. En utilisant l'algorithme
+            <a href="https://huggingface.co/blog/deep-rl-ppo" target="_blank"
+              >PPO (Proximal Policy Optimization)</a
+            >
           </p>
         </div>
       </div>
@@ -106,11 +108,11 @@ body {
     gap: 2em;
     margin-top: 2em;
 
-    &__pipe{
-      position:fixed;
+    &__pipe {
+      position: fixed;
       right: 17%;
       bottom: -25%;
-      width:600px;
+      width: 600px;
       z-index: 0;
     }
 
