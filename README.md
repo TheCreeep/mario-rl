@@ -161,6 +161,6 @@ This project is licensed under the `ℹ️  INSERT-LICENSE-TYPE` License. See th
 
 ## 👏 Acknowledgments
 
-> - `ℹ️  [Thanks to dhruvramani for this, it saved me](https://github.com/dhruvramani/gym-render-browser)`
+> - ℹ️  [Thanks to dhruvramani for this, it saved me](https://github.com/dhruvramani/gym-render-browser)
 
 ---
