@@ -17,8 +17,11 @@
       </button>
     </div>
 
-    <div v-if="isNewTraining && activeTab === 'newModel'">ici ca train</div>
-    <div v-else-if="!isNewTraining && activeTab === 'newModel'" class="new-model-tab">
+    <div v-if="store.isTraining && activeTab === 'newModel'" class="content__training">
+      <img src="@/assets/loading.gif" alt="loading" />
+      <h1 class="content__training__title">Entrainement du modèle...</h1>
+    </div>
+    <div v-else-if="!store.isTraining && activeTab === 'newModel'" class="new-model-tab">
       <h1>Create a New Model</h1>
       <div class="new-model-tab__inputs">
         <div class="new-model-tab__inputs__item" v-for="input in inputs">
@@ -36,8 +39,8 @@
       <div class="new-model-tab__save" @click="sendToTrain(store)">Send for Training !</div>
     </div>
 
-    <div v-if="isExistingTraining && activeTab === 'trainModel'">ici ca train</div>
-    <div v-else-if="!isExistingTraining && activeTab === 'trainModel'" class="train-model-tab">
+    <div v-if="store.isTraining && activeTab === 'trainModel'">ici ca train</div>
+    <div v-else-if="!store.isTraining && activeTab === 'trainModel'" class="train-model-tab">
       Coming soon...
     </div>
   </div>
@@ -53,8 +56,6 @@ export default {
   data() {
     return {
       activeTab: 'newModel',
-      isNewTraining: false,
-      isExistingTraining: false,
       inputs: {
         learning_rate: {
           type: 'number',
@@ -148,6 +149,19 @@ export default {
     }
   }
 
+  &__training{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    &__title{
+      font-family: 'MarioMaker';
+      font-size: 2em;
+      color: #333;
+    }
+  }
+
   .new-model-tab {
     font-family: 'MarioMaker';
     display: flex;
@@ -220,7 +234,7 @@ export default {
     gap: 2em;
     margin-top: 2em;
     font-size: 3em;
-    color:#333
+    color: #333;
   }
 }
 </style>

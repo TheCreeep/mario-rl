@@ -8,7 +8,8 @@ export const useModelsStore = defineStore('modelsStore', {
     models: [],
     modelPerPage: 10,
     loading: false,
-    modelInUse: null
+    modelInUse: null,
+    isTraining: false
   }),
   actions: {
     async getAllModels() {
@@ -41,16 +42,21 @@ export const useModelsStore = defineStore('modelsStore', {
         })
     },
     async trainModel(modelParams) {
+      this.isTraining = true
+      toast.success('Starting training...', {
+        position: 'bottom-right',
+        autoClose: 3000
+      })
       try {
         const response = await axios.post(import.meta.env.VITE_API_BASE_URL + 'models', modelParams)
         console.log(response.data)
-        /* if (response.status === 200) {
-          for await (const progress of generator) {
-            // update the loading bar with the progress
-            console.log(`Training progress: ${progress}%`)
-          }
-          console.log('Training complete!')
-        } */
+        if (response.data.code == 200) {
+          toast.success(response.data.message, {
+            position: 'bottom-right',
+            autoClose: 3000
+          })
+          this.isTraining = false
+        }
       } catch (error) {
         toast.error('Erreur : Entrainement du modèle impossible. Veuillez réessayer. ', {
           position: 'bottom-right',
