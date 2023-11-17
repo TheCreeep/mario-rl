@@ -37,7 +37,10 @@ export default {
     return {}
   },
   methods: {},
-  mounted() {}
+  mounted() {},
+  unmounted: () => {
+    location.reload()
+  }
 }
 </script>
 
