@@ -1,7 +1,13 @@
 <template>
   <div class="content">
     <div class="content__gameplay" v-if="store.modelInUse != null">
-      <h1>Actuellement en train de jouer avec le model suivant</h1>
+      <h1>Actuellement en train de jouer avec le model suivant : {{ store.modelInUse.name }}</h1>
+      <h2>{{ 'Epochs : ' + store.modelInUse.epoch }}</h2>
+      <h2>{{ 'Learning rate : ' + store.modelInUse.lr }}</h2>
+      <!-- <h2>{{ 'Batch size : ' + store.modelInUse.batch_size }}</h2> -->
+      <!-- <h2>{{ 'Clip range : ' + store.modelInUse.clip_range }}</h2> -->
+      <!-- <h2>{{ 'Steps : ' + store.modelInUse.steps }}</h2> -->
+      <!-- <h2>{{ 'Seed : ' + store.modelInUse.seed }}</h2> -->
 
       <img
         :src="'http://127.0.0.1:5000/render_feed?model=' + store.modelInUse.name"

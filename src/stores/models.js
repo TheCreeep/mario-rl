@@ -39,6 +39,24 @@ export const useModelsStore = defineStore('modelsStore', {
             theme: 'dark'
           })
         })
+    },
+    async trainModel(modelParams) {
+      try {
+        const response = await axios.post(import.meta.env.VITE_API_BASE_URL + 'models', modelParams)
+        console.log(response.data)
+        /* if (response.status === 200) {
+          for await (const progress of generator) {
+            // update the loading bar with the progress
+            console.log(`Training progress: ${progress}%`)
+          }
+          console.log('Training complete!')
+        } */
+      } catch (error) {
+        toast.error('Erreur : Entrainement du modèle impossible. Veuillez réessayer. ', {
+          position: 'bottom-right',
+          theme: 'dark'
+        })
+      }
     }
   },
   getters: {

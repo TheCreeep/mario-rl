@@ -29,6 +29,7 @@
 ---
 
 ## 📒 Table of Contents
+
 - [📒 Table of Contents](#-table-of-contents)
 - [📍 Overview](#-overview)
 - [⚙️ Features](#️-features)
@@ -43,10 +44,9 @@
 
 ---
 
-
 ## 📍 Overview
 
-Final Project for my 3WA AI Developer Diploma, this Mario Reinforcement Learning webapp 
+Final Project for my 3WA AI Developer Diploma, this Mario Reinforcement Learning webapp
 idea comes from my love for video games, greatly inspired from Nicholas Renotte and also CodeBullet's videos.
 
 The goal is to create a webapp that allows the user to train a Reinforcement Learning model to play Super Mario Bros.
@@ -66,7 +66,6 @@ Hope you like it !
 - Watching the model play the game
 - Changing the settings of the training
 
-
 ---
 
 ## 🧩 Modules
@@ -74,7 +73,7 @@ Hope you like it !
 <details closed><summary>Root</summary>
 
 | File                                                                                         | Summary                   |
-| ---                                                                                          | ---                       |
+| -------------------------------------------------------------------------------------------- | ------------------------- |
 | [.eslintrc.cjs](https://github.com/TheCreeep/mario-rl/blob/main/.eslintrc.cjs)               | HTTPStatus Exception: 429 |
 | [index.html](https://github.com/TheCreeep/mario-rl/blob/main/index.html)                     | HTTPStatus Exception: 429 |
 | [vite.config.js](https://github.com/TheCreeep/mario-rl/blob/main/vite.config.js)             | HTTPStatus Exception: 429 |
@@ -97,6 +96,7 @@ Hope you like it !
 ### ✔️ Prerequisites
 
 Before you begin, ensure that you have the following prerequisites installed:
+
 > - `ℹ️ PostgreSQL`
 > - `ℹ️ Python and Pip`
 > - `ℹ️ Node.js and NPM or Yarn`
@@ -104,16 +104,19 @@ Before you begin, ensure that you have the following prerequisites installed:
 ### 📦 Installation
 
 1. Clone the mario-rl repository:
+
 ```sh
 git clone https://github.com/TheCreeep/mario-rl
 ```
 
 2. Change to the project directory:
+
 ```sh
 cd mario-rl
 ```
 
 3. Install the dependencies:
+
 ```sh
 npm install
 ```
@@ -126,30 +129,35 @@ npm run start
 
 ---
 
-
-
 ---
 
 ## 🤝 Contributing
 
 Contributions are always welcome! Please follow these steps:
+
 1. Fork the project repository. This creates a copy of the project on your account that you can modify without affecting the original project.
 2. Clone the forked repository to your local machine using a Git client like Git or GitHub Desktop.
 3. Create a new branch with a descriptive name (e.g., `new-feature-branch` or `bugfix-issue-123`).
+
 ```sh
 git checkout -b new-feature-branch
 ```
+
 4. Make changes to the project's codebase.
 5. Commit your changes to your local branch with a clear commit message that explains the changes you've made.
+
 ```sh
 git commit -m 'Implemented new feature.'
 ```
+
 6. Push your changes to your forked repository on GitHub using the following command
+
 ```sh
 git push origin new-feature-branch
 ```
+
 7. Create a new pull request to the original project repository. In the pull request, describe the changes you've made and why they're necessary.
-The project maintainers will review your changes and provide feedback or merge them into the main branch.
+   The project maintainers will review your changes and provide feedback or merge them into the main branch.
 
 ---
 

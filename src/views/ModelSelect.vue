@@ -6,7 +6,10 @@
         <div class="content__select__models__modelpage" v-for="page in store.pages" :key="page.id">
           <div
             class="content__select__models__modelpage__model"
-            :class="selectedModel === model ? '--selected' : '', modelPreview === model ? '--preview' : ''"
+            :class="
+              (selectedModel === model ? '--selected' : '',
+              modelPreview === model ? '--preview' : '')
+            "
             v-for="model in page.page"
             :key="model.id"
             @click="previewModel(model)"
@@ -177,7 +180,7 @@ export default {
       this.$router.push('/dataview')
     },
     deleteModel(store, model) {
-      if(model === this.modelPreview) this.modelPreview = null
+      if (model === this.modelPreview) this.modelPreview = null
       store.deleteModel(model)
     }
   }
@@ -397,15 +400,15 @@ $rows: 2;
               height: 50px;
 
               svg {
-                width: calc(14px*1.2);
-                height: calc(16px*1.2);
+                width: calc(14px * 1.2);
+                height: calc(16px * 1.2);
               }
             }
           }
 
           &.--preview {
-            border: 3px solid #DDD;
-            outline: 3px solid #DDD;
+            border: 3px solid #ddd;
+            outline: 3px solid #ddd;
           }
 
           &.--selected {
