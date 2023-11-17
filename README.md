@@ -161,14 +161,8 @@ git push origin new-feature-branch
 
 ---
 
-## 📄 License
-
-This project is licensed under the `ℹ️  INSERT-LICENSE-TYPE` License. See the [LICENSE](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository) file for additional info.
-
----
-
 ## 👏 Acknowledgments
 
-> - `ℹ️  [Thanks to dhruvramani for this, it saved me](https://github.com/dhruvramani/gym-render-browser)`
+> - ℹ️  [Thanks to dhruvramani for this, it saved me](https://github.com/dhruvramani/gym-render-browser)
 
 ---
